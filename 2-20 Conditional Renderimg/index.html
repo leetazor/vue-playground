@@ -1,0 +1,52 @@
+<!DOCTYPE>
+<html>
+
+<head>
+  <title>VueJS Course</title>
+  <link rel="stylesheet" type="text/css" href="main.css" />
+</head>
+
+<body>
+  <div id="app">
+    <h1>V-If condiditional rendering</h1>
+    <!-- v-if renders the element if the condition evaluates to true,
+    if it's false - it completely removes the elemen from the DOM -->
+
+
+    <!-- v-if reads as 'display this element if condition is true'
+      in the case below, we are using variable mode from the data()
+      if 'mode' is set to 1, the below will render -->
+    <p v-if="mode == 1">Showing v-if directive content</p>
+ 
+
+    <!-- v-else-if element can only be place directly after v-if element -->
+    <!-- the elements don't have to be of the same type, but we can't wrap this into a div tag -->
+    <!-- 2 elements can be wrapped in a Vue 'template' tag
+      if they need to be rendered together in one of the conditions -->
+    <template v-else-if="mode == 2" >
+      <p>Bonus content</p>
+      <h3>Showing v-else-if</h3>
+    </template>
+
+    <!-- v-else element will appear on the page if all of the previously
+    evaluetad v-if and v-else-if conditions returned false -->
+    <p v-else>Showing v-else</p>
+
+    <h1>V-Show</h1>
+    <!-- v-show displays the element if the condition evaluates to true,
+    if it's false - it attaches a 'display: none' style to it -->
+
+    <p v-show="mode == 1">Showing the element if mode = 1</p>
+
+    <select v-model="mode">
+      <option value="1">v-if mode = 1</option>
+      <option value="2">v-else-if mode = 2</option>
+      <option value="3">v-else</option>
+    </select>
+  </div>
+
+  <script src="https://unpkg.com/vue@next"></script>
+  <script src="app.js"></script>
+</body>
+
+</html>

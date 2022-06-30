@@ -1,0 +1,60 @@
+<!DOCTYPE>
+<html>
+
+<head>
+  <title>VueJS Course</title>
+  <link rel="stylesheet" type="text/css" href="main.css" />
+</head>
+
+<body>
+  <div id="app">
+
+    <h1>Looping through array of Birds</h1>
+    <ul>
+      <!-- Example of looping in Vue with v-for -->
+      <!-- we can use each iteration's value to set unique class for each iteration's wrapper, etc -->
+      <li v-for="bird in birds" :class="bird" >
+        {{ bird }} - {{ index }}
+      </li>
+    </ul>
+
+    <h1>Looping through array of Birds with Indexes</h1>
+
+    <ul>
+      <!-- to get the index of each iteration, we can provide a second argument to the loop item.
+      we're not required to call it 'index' - it can be called whatever.
+      but it's a common practice to use the word 'index' -->
+      <!-- we can't use 'index' as a reliable unique identifier to keep track of each item.
+      for that, we need to bind a :key to each iterable element -->
+      <li v-for="(bird, index) in birds" :key="bird" >
+        {{ bird }} - {{ index }}
+      </li>
+    </ul>
+
+    <hr />
+
+    <h1>Looping through array of Objects</h1>
+    <ul>
+      <li v-for="person in people" >
+        {{ person }} <br />
+        {{person.name}} {{person.age}}
+      </li>
+    </ul>
+
+    <h1>Looping inside a loop</h1>
+    <ul>
+      <!-- we can use loop inside of a loop. 'index' here is optional, if we want to apply it -->      
+      <li v-for="person in people" >
+        <div v-for="(value, key, index) in person">
+         {{key}}: {{value}} - Index: {{ index }}
+        </div>
+      </li>
+    </ul>
+
+  </div>
+
+  <script src="https://unpkg.com/vue@next"></script>
+  <script src="app.js"></script>
+</body>
+
+</html>
