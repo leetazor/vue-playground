@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>VueJS</title>
+    <link rel="stylesheet" type="text/css" href="main.css" />
+  </head>
+  <body>
+    <div id="app" v-cloak >
+       <!-- 'computed' methods must be called without (), Vue treats them like data -->
+      <p>{{ fullName }}</p>
+      <!-- to make a dynamic attiribute, we need to add v-bind: in front of it,
+        which can also be done without v-bind, e.g. v-bind:href = :href -->
+      <p><a :href="url" target="_blank">Google</a></p>
+      <!-- outputting raw html -->
+      <p v-html="raw_url"></p>
+
+      <p>Age: {{ age }} ({{ typeof age }})</p>
+      <hr />
+      <label>First Name</label>
+      <!-- typing into this input field will dynamically update the 'firstName' field inside data -->
+      <!-- .lazy modifier will only update the value in the data when user moves away from the input
+      .trim modifier will remove all extra white space before inserting input into data -->
+      <input type="text" v-model.lazy.trim="firstName" >
+
+      <label>Middle Name</label>
+      <!-- We're using a Vue Key Modifier 'enter' here to specify that the event
+      will only trigger on 'Enter' key up -->
+      <input type="text" @keyup.enter="updateMiddleName">
+
+      <label>Last Name</label>
+      <!-- this will reflect the value currently stored in data for lastName, 
+      and will update it dynamically through the updateLastName method on input -->
+      <!-- with functions that need 'event' passed, if we need to pass anything else,
+      we must also manually pass an event as: $event -->
+      <!-- .prevent is an event modifier after - this will equivalent to us
+      explicitly typing event.preventDefault() inside on the callback function -->
+      <input type="text" :value="lastName"
+         @input.prevent="updateLastName('Last name event triggered', $event)">
+
+      <label>Age</label>
+      <!-- the .number modifier will convert the input into a number, instead of default string -->
+      <input type="number" v-model.number="age" >
+
+      <!-- in vue, we don't have to add () to a function inside a directive, if it doesn't have any parameters -->
+      <button type="button" v-on:click="increment">Increment</button>
+
+      <!-- v-on: can be written as @ as a shorthand, so v-on:click = @click  -->
+      <!-- inside the html template, we can access the data without referencing the object,
+      because Vue will automatically assume - any data we access in the template
+      will automatically come from the data object -->
+      <!-- .ctrl is a Vue System Modifier Key. when applied, it will ensure the event will only
+      get triggered when Ctrl button is hold while typing  -->
+      <button type="button" @click.ctrl="age--">Decrement</button>
+    </div>
+
+    <!-- Second instance of the Vue App on the same page,
+      this instance is completely isolated from App2:
+       <div id="app2">
+      {{ firstName }}
+      {{ lastName }}
+    </div> -->
+
+    <script src="https://unpkg.com/vue@3"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
+
+
