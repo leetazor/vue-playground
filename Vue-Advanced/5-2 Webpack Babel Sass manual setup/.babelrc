@@ -1,0 +1,9 @@
+// this is the configuration file Babel will look for when compiling our code
+// configuration object:
+{
+  // babel will load the modules we add to this array
+  "presets" : [
+    // this preset contains a list of rules for converting JS syntax into older syntax
+    "@babel/preset-env"
+  ]
+}
